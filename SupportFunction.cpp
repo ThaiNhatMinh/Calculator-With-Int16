@@ -107,87 +107,19 @@ void StringBitToStringNumber(int data[4], string &kq)
 {
 	string temp;
 	temp.resize(1);
-	temp[0] = '0'; 
+	temp[0] = '0';
 	if ((data[0] >> 31) == 0)
 	{
-		int m = 31,n=0;
-		while (((data[n] >> m)&1) != 1)
-		{
-				
-			if (n == 4){  break; }
-			if (m != 0){ m--;  }
-			else{ m = 31; n++;  }
-		}
-		
-		if (n != 4){
-
-		for (int i = n; i <=3; i++)
-		{
-
-			if (i >n)
-			{
-				
-				for (int j = 31; j >=0; j--)
-				{
-					bool tam = (data[i] >> j) & 1;
-					NhanChuoiCho2(temp, kq, tam);
-					temp.resize(kq.size());
-					for (int k = 0; k < kq.size(); k++)
-					{
-						temp[k] = kq[k];
-					}
-				}
-			}
-			if (i == n)
-			{
-
-				for (int j = m; j >=0; j--)
-				{
-					bool tam = (data[i] >> j) & 1;
-					NhanChuoiCho2(temp, kq, tam);
-					temp.resize(kq.size());
-					for (int k = 0; k < kq.size(); k++)
-					{
-						temp[k] = kq[k];
-					}
-				}
-			}
-
-		
-			
-		}
-		}
-		else{ kq.resize(1); kq[0] = 48; }
-	}
-	
-	if (((data[0] >> 31)&1) == 1)
-	{
-		
-		
-		for (int i = 3; i >= 0; i--)
-		{
-			if (data[i] == 0){ data[i] = -1; }
-			else
-			{
-				data[i] -= 1; break;
-			}
-		}
-		
-		for (int i = 0; i < 4; i++)
-		{
-			DaoBit(data[i]);
-		}
-		
 		int m = 31, n = 0;
 		while (((data[n] >> m) & 1) != 1)
 		{
 
-			if (n == 4){ break; }
-			if (m != 0){ m--; }
-			else{ m = 31; n++; }
+			if (n == 4) { break; }
+			if (m != 0) { m--; }
+			else { m = 31; n++; }
 		}
 
-		if (n != 4){
+		if (n != 4) {
 
 			for (int i = n; i <= 3; i++)
 			{
@@ -225,13 +157,89 @@ void StringBitToStringNumber(int data[4], string &kq)
 
 			}
 		}
-		else{  kq.resize(1); kq[0] = 48; }
-		kq.resize(kq.size()+1);
-		for (int i = kq.size()-1; i>=1; i--)
+		else { kq.resize(1); kq[0] = 48; }
+	}
+
+	if (((data[0] >> 31) & 1) == 1)
+	{
+
+
+		for (int i = 3; i >= 0; i--)
 		{
-			kq[i] = kq[i-1];
+			if (data[i] == 0) { data[i] = -1; }
+			else
+			{
+				data[i] -= 1; break;
+			}
+		}
+
+		for (int i = 0; i < 4; i++)
+		{
+			DaoBit(data[i]);
+		}
+
+		int m = 31, n = 0;
+		while (((data[n] >> m) & 1) != 1)
+		{
+
+			if (n == 4) { break; }
+			if (m != 0) { m--; }
+			else { m = 31; n++; }
+		}
+
+		if (n != 4) {
+
+			for (int i = n; i <= 3; i++)
+			{
+
+				if (i >n)
+				{
+
+					for (int j = 31; j >= 0; j--)
+					{
+						bool tam = (data[i] >> j) & 1;
+						NhanChuoiCho2(temp, kq, tam);
+						temp.resize(kq.size());
+						for (int k = 0; k < kq.size(); k++)
+						{
+							temp[k] = kq[k];
+						}
+					}
+				}
+				if (i == n)
+				{
+
+					for (int j = m; j >= 0; j--)
+					{
+						bool tam = (data[i] >> j) & 1;
+						NhanChuoiCho2(temp, kq, tam);
+						temp.resize(kq.size());
+						for (int k = 0; k < kq.size(); k++)
+						{
+							temp[k] = kq[k];
+						}
+					}
+				}
+
+
+
+			}
+		}
+		else { kq.resize(1); kq[0] = 48; }
+		kq.resize(kq.size() + 1);
+		for (int i = kq.size() - 1; i >= 1; i--)
+		{
+			kq[i] = kq[i - 1];
 		}
 		kq[0] = '-';
+
+		int datatemp[4];
+		TimSoBu2(data, datatemp);
+
+		for (int o = 0; o < 4; o++)
+		{
+			data[o] = datatemp[o];
+		}
 
 	}
 }

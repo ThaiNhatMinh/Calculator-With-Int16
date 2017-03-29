@@ -13,7 +13,7 @@ BOOL CMyApp_::InitInstance()
 
 
 
-CMainForm::CMainForm() :m_iXPos(400), m_iYPos(200), m_iWidth(600),m_iHeight(325), m_iCounter(0)
+CMainForm::CMainForm() :m_iXPos(400), m_iYPos(200), m_iWidth(800),m_iHeight(360), m_iCounter(0)
 {
 	m_iOperator = 1;
 	CRect rect;
@@ -23,7 +23,7 @@ CMainForm::CMainForm() :m_iXPos(400), m_iYPos(200), m_iWidth(600),m_iHeight(325)
 	rect.bottom = m_iYPos + m_iHeight;
 	Create(NULL, _T("Calculator with BigInt"), WS_OVERLAPPED|WS_SYSMENU, rect,NULL);
 
-	m_MainFont.CreatePointFont(160, _T("Arial"));
+	m_MainFont.CreatePointFont(120, _T("Arial"));
 	int w = 30;
 	int h = 30;
 	int x = 10;
@@ -80,13 +80,13 @@ CMainForm::CMainForm() :m_iXPos(400), m_iYPos(200), m_iWidth(600),m_iHeight(325)
 	m_Calculate.Create(_T("="), WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON, CRect(m_iWidth - w - 20 - 10, m_iHeight / 2 + h * 2, m_iWidth - w - 20 + w, m_iHeight / 2 + h * 3), this, ID);
 	ID++;
 
-	m_BinaryLine.Create("BIN: ", WS_CHILD | WS_VISIBLE | SS_LEFT | SS_NOTIFY, CRect(0, 10 + (30 + 10) * 2, m_iWidth - 20, 10 + (30 + 10) * 2 + 15), this, ID);
+	m_BinaryLine.Create("BIN: ", WS_CHILD | WS_VISIBLE | SS_LEFT | SS_NOTIFY, CRect(0, 10 + (30 + 10) * 2, m_iWidth - 20, 10 + (30 + 10) * 2 + 30), this, ID);
 	ID++;
 
-	m_HexLine.Create("HEX: ", WS_CHILD | WS_VISIBLE | SS_LEFT | SS_NOTIFY, CRect(0, 10 + (30 + 10) * 2 + 15 + 10, m_iWidth - 20, 10 + (30 + 10) * 2 + 15 + 10 + 15), this, ID);
+	m_HexLine.Create("HEX: ", WS_CHILD | WS_VISIBLE | SS_LEFT | SS_NOTIFY, CRect(0, 10 + (30 + 10) * 2 + 30 + 10, m_iWidth - 20, 10 + (30 + 10) * 2 + (30 + 10) + 15), this, ID);
 	ID++;
 
-	m_DecLine.Create("DEC: ", WS_CHILD | WS_VISIBLE | SS_LEFT | SS_NOTIFY, CRect(0, 10 + (30 + 10) * 2 + (15 + 10)*2, m_iWidth - 20, 10 + (30 + 10) * 2 + (15 + 10)*2 + 15), this, ID);
+	m_DecLine.Create("DEC: ", WS_CHILD | WS_VISIBLE | SS_LEFT | SS_NOTIFY, CRect(0, 10 + (30 + 10) * 2 + (15 + 10) + (30+10), m_iWidth - 20, 10 + (30 + 10) * 2 + (15 + 10) +(30+10) + 15), this, ID);
 	ID++;
 
 	x += 10 + w;
@@ -133,6 +133,10 @@ void CMainForm::OnPushButtonClicked_A()
 	string bin;
 	m_Curent.SetData16(m_CurentString);
 	m_Curent.DecToBit(bin);
+	if (bin.size() > 75)
+	{
+		bin.insert(75, "\n");
+	}
 	m_BinaryLine.SetWindowText(("BIN: " + bin).c_str());
 	m_Curent.Bintohex(bin);
 	m_HexLine.SetWindowText(("HEX: " + bin).c_str());
@@ -147,6 +151,10 @@ void CMainForm::OnPushButtonClicked_B()
 	string bin;
 	m_Curent.SetData16(m_CurentString);
 	m_Curent.DecToBit(bin);
+	if (bin.size() > 75)
+	{
+		bin.insert(75, "\n");
+	}
 	m_BinaryLine.SetWindowText(("BIN: " + bin).c_str());
 	m_Curent.Bintohex(bin);
 	m_HexLine.SetWindowText(("HEX: " + bin).c_str());
@@ -160,6 +168,10 @@ void CMainForm::OnPushButtonClicked_C()
 	string bin;
 	m_Curent.SetData16(m_CurentString);
 	m_Curent.DecToBit(bin);
+	if (bin.size() > 75)
+	{
+		bin.insert(75, "\n");
+	}
 	m_BinaryLine.SetWindowText(("BIN: " + bin).c_str());
 	m_Curent.Bintohex(bin);
 	m_HexLine.SetWindowText(("HEX: " + bin).c_str());
@@ -173,6 +185,10 @@ void CMainForm::OnPushButtonClicked_D()
 	string bin;
 	m_Curent.SetData16(m_CurentString);
 	m_Curent.DecToBit(bin);
+	if (bin.size() > 75)
+	{
+		bin.insert(75, "\n");
+	}
 	m_BinaryLine.SetWindowText(("BIN: " + bin).c_str());
 	m_Curent.Bintohex(bin);
 	m_HexLine.SetWindowText(("HEX: " + bin).c_str());
@@ -186,6 +202,10 @@ void CMainForm::OnPushButtonClicked_E()
 	string bin;
 	m_Curent.SetData16(m_CurentString);
 	m_Curent.DecToBit(bin);
+	if (bin.size() > 75)
+	{
+		bin.insert(75, "\n");
+	}
 	m_BinaryLine.SetWindowText(("BIN: " + bin).c_str());
 	m_Curent.Bintohex(bin);
 	m_HexLine.SetWindowText(("HEX: " + bin).c_str());
@@ -199,6 +219,11 @@ void CMainForm::OnPushButtonClicked_F()
 	string bin;
 	m_Curent.SetData16(m_CurentString);
 	m_Curent.DecToBit(bin);
+	
+	if (bin.size() > 75)
+	{
+		bin.insert(75, "\n");
+	}
 	m_BinaryLine.SetWindowText(("BIN: " + bin).c_str());
 	m_Curent.Bintohex(bin);
 	m_HexLine.SetWindowText(("HEX: " + bin).c_str());
@@ -209,7 +234,9 @@ void CMainForm::OnPushButtonClicked_F()
 
 void CMainForm::OnPushButtonClicked_0()
 {
-	if (m_CurentString.size() == 0) return;
+	if(m_CurentString.size()==1&&  (m_CurentString[0] == '0') )return;
+	if (m_InputType == 2 && m_CurentString.size() == 128) return;
+
 	m_CurentString += "0";
 
 	m_Line2.SetWindowText(m_CurentString.c_str());
@@ -219,6 +246,10 @@ void CMainForm::OnPushButtonClicked_0()
 	{
 		m_Curent.SetData(m_CurentString);
 		m_Curent.DecToBit(bin);
+		if (bin.size() > 75)
+		{
+			bin.insert(75, "\n");
+		}
 		m_BinaryLine.SetWindowText(("BIN: " + bin).c_str());
 		m_DecLine.SetWindowText(("DEC: " + m_CurentString).c_str());
 	}
@@ -226,7 +257,12 @@ void CMainForm::OnPushButtonClicked_0()
 	{
 		m_Curent.BinToDec(m_CurentString);
 		m_Curent.DecToBit(bin);
-		m_BinaryLine.SetWindowText(("BIN: " + m_CurentString).c_str());
+		string t = m_CurentString;
+		if (t.size() > 75)
+		{
+			t.insert(75, "\n");
+		}
+		m_BinaryLine.SetWindowText(("BIN: " + t).c_str());
 		m_Curent.ToDec(bin);
 		m_DecLine.SetWindowText(("DEC: " + bin).c_str());
 	}
@@ -245,6 +281,10 @@ void CMainForm::OnPushButtonClicked_1()
 	{
 		m_Curent.SetData(m_CurentString);
 		m_Curent.DecToBit(bin);
+		if (bin.size() > 75)
+		{
+			bin.insert(75, "\n");
+		}
 		m_BinaryLine.SetWindowText(("BIN: " + bin).c_str());
 		m_DecLine.SetWindowText(("DEC: " + m_CurentString).c_str());
 	}
@@ -252,7 +292,12 @@ void CMainForm::OnPushButtonClicked_1()
 	{
 		m_Curent.BinToDec(m_CurentString);
 		m_Curent.DecToBit(bin);
-		m_BinaryLine.SetWindowText(("BIN: " + m_CurentString).c_str());
+		string t = m_CurentString;
+		if (t.size() > 75)
+		{
+			t.insert(75, "\n");
+		}
+		m_BinaryLine.SetWindowText(("BIN: " + t).c_str());
 		m_Curent.ToDec(bin);
 		m_DecLine.SetWindowText(("DEC: " + bin).c_str());
 	}
@@ -269,6 +314,10 @@ void CMainForm::OnPushButtonClicked_2()
 	string bin;
 	m_Curent.SetData(m_CurentString);
 	m_Curent.DecToBit(bin);
+	if (bin.size() > 75)
+	{
+		bin.insert(75, "\n");
+	}
 	m_BinaryLine.SetWindowText(("BIN: " + bin).c_str());
 	m_Curent.Bintohex(bin);
 	m_HexLine.SetWindowText(("HEX: " + bin).c_str());
@@ -284,6 +333,10 @@ void CMainForm::OnPushButtonClicked_3()
 	string bin;
 	m_Curent.SetData(m_CurentString);
 	m_Curent.DecToBit(bin);
+	if (bin.size() > 75)
+	{
+		bin.insert(75, "\n");
+	}
 	m_BinaryLine.SetWindowText(("BIN: " + bin).c_str());
 	m_Curent.Bintohex(bin);
 	m_HexLine.SetWindowText(("HEX: " + bin).c_str());
@@ -299,6 +352,10 @@ void CMainForm::OnPushButtonClicked_4()
 	string bin;
 	m_Curent.SetData(m_CurentString);
 	m_Curent.DecToBit(bin);
+	if (bin.size() > 75)
+	{
+		bin.insert(75, "\n");
+	}
 	m_BinaryLine.SetWindowText(("BIN: " + bin).c_str());
 	m_Curent.Bintohex(bin);
 	m_HexLine.SetWindowText(("HEX: " + bin).c_str());
@@ -314,6 +371,10 @@ void CMainForm::OnPushButtonClicked_5()
 	string bin;
 	m_Curent.SetData(m_CurentString);
 	m_Curent.DecToBit(bin);
+	if (bin.size() > 75)
+	{
+		bin.insert(75, "\n");
+	}
 	m_BinaryLine.SetWindowText(("BIN: " + bin).c_str());
 	m_Curent.Bintohex(bin);
 	m_HexLine.SetWindowText(("HEX: " + bin).c_str());
@@ -329,6 +390,10 @@ void CMainForm::OnPushButtonClicked_6()
 	string bin;
 	m_Curent.SetData(m_CurentString);
 	m_Curent.DecToBit(bin);
+	if (bin.size() > 75)
+	{
+		bin.insert(75, "\n");
+	}
 	m_BinaryLine.SetWindowText(("BIN: " + bin).c_str());
 	m_Curent.Bintohex(bin);
 	m_HexLine.SetWindowText(("HEX: " + bin).c_str());
@@ -344,6 +409,10 @@ void CMainForm::OnPushButtonClicked_7()
 	string bin;
 	m_Curent.SetData(m_CurentString);
 	m_Curent.DecToBit(bin);
+	if (bin.size() > 75)
+	{
+		bin.insert(75, "\n");
+	}
 	m_BinaryLine.SetWindowText(("BIN: " + bin).c_str());
 	m_Curent.Bintohex(bin);
 	m_HexLine.SetWindowText(("HEX: " + bin).c_str());
@@ -359,6 +428,10 @@ void CMainForm::OnPushButtonClicked_8()
 	string bin;
 	m_Curent.SetData(m_CurentString);
 	m_Curent.DecToBit(bin);
+	if (bin.size() > 75)
+	{
+		bin.insert(75, "\n");
+	}
 	m_BinaryLine.SetWindowText(("BIN: " + bin).c_str());
 	m_Curent.Bintohex(bin);
 	m_HexLine.SetWindowText(("HEX: " + bin).c_str());
@@ -374,6 +447,10 @@ void CMainForm::OnPushButtonClicked_9()
 	string bin;
 	m_Curent.SetData(m_CurentString);
 	m_Curent.DecToBit(bin);
+	if (bin.size() > 75)
+	{
+		bin.insert(75, "\n");
+	}
 	m_BinaryLine.SetWindowText(("BIN: " + bin).c_str());
 	m_Curent.Bintohex(bin);
 	m_HexLine.SetWindowText(("HEX: " + bin).c_str());
@@ -406,7 +483,9 @@ void CMainForm::OnPushButtonClearBack()
 	string bin;
 	m_Curent.SetData(m_CurentString);
 	m_Curent.DecToBit(bin);
-	m_BinaryLine.SetWindowText(("BIN: " + bin).c_str());
+	string t = bin;
+	if (t.size() > 75) t.insert(75, "\n");
+	m_BinaryLine.SetWindowText(("BIN: " + t).c_str());
 	m_Curent.Bintohex(bin);
 	m_HexLine.SetWindowText(("HEX: " + bin).c_str());
 	m_Curent.ToDec(bin);
@@ -419,6 +498,7 @@ void CMainForm::OnPushButtonOperator1()
 	if(m_InputType==1) m_Curent.SetData(m_CurentString);
 	else if (m_InputType == 2) m_Curent.BinToDec(m_CurentString);
 	else m_Curent.Bintohex(m_CurentString);
+	
 	switch (m_iOperator)
 	{
 	case 1:
@@ -456,6 +536,7 @@ void CMainForm::OnPushButtonOperator1()
 		m_Sum = m_Sum & m_Curent;
 		break;
 	}
+
 	if (m_InputType == 1) m_Sum.ToDec(m_CurentString);
 	else if (m_InputType == 2) {}//m_Sum.DecToBit(m_CurentString);
 								 // else 
@@ -471,7 +552,14 @@ void CMainForm::OnPushButtonOperator1()
 
 void CMainForm::OnPushButtonOperator2()
 {
-	if (m_CurentString.size() == 0) return;
+	if (m_CurentString.size() == 0)
+	{
+		m_CurentString += "-";
+		m_Line2.SetWindowText(m_CurentString.c_str());
+		return;
+	}
+	else if (m_CurentString.size() == 1 && m_CurentString[0] == '-') return;
+
 	if (m_InputType == 1) m_Curent.SetData(m_CurentString);
 	else if (m_InputType == 2) m_Curent.BinToDec(m_CurentString);
 	else m_Curent.Bintohex(m_CurentString);
@@ -700,7 +788,9 @@ void CMainForm::OnPushButtonCalculate()
 	
 	string bin;
 	m_Sum.DecToBit(bin);
-	m_BinaryLine.SetWindowText(("BIN: " + bin).c_str());
+	string t = bin;
+	if (t.size() > 75) t.insert(75, "\n");
+	m_BinaryLine.SetWindowText(("BIN: " + t).c_str());
 
 	m_Sum.Bintohex(bin);
 	m_HexLine.SetWindowText(("HEX: " + bin).c_str());
@@ -729,8 +819,19 @@ void CMainForm::OnPushButtonInputBin()
 		}
 		else
 		{
-			temp.DecToBit(bin);
-			m_Line2.SetWindowText(bin.c_str());
+			CString a;
+			m_Line2.GetWindowText(a);
+			if (a.GetLength())
+			{
+				m_CurentString = string(a.GetString());
+#if defined(_DEBUG)
+				MessageBox(_T(m_CurentString.c_str()));
+#endif
+				temp.SetData(m_CurentString);
+				temp.DecToBit(m_CurentString);
+				m_Line2.SetWindowText(m_CurentString.c_str());
+			}
+			
 		}
 	}
 	else if (m_InputType == 3)
@@ -743,8 +844,15 @@ void CMainForm::OnPushButtonInputBin()
 		}
 		else
 		{
-			temp.DecToBit(bin);
-			m_Line2.SetWindowText(bin.c_str());
+			CString a;
+			m_Line2.GetWindowText(a);
+			if (a.GetLength())
+			{
+				m_CurentString = string(a.GetString());
+				temp.SetData16(m_CurentString);
+				temp.DecToBit(m_CurentString);
+				m_Line2.SetWindowText(m_CurentString.c_str());
+			}
 		}
 	}
 
@@ -775,9 +883,16 @@ void CMainForm::OnPushButtonInputHex()
 		}
 		else
 		{
-			temp.Bintohex(bin);
-			m_Line2.SetWindowText(bin.c_str());
-		}
+			CString a;
+			m_Line2.GetWindowText(a);
+			if (a.GetLength())
+			{
+				m_CurentString = string(a.GetString());
+				temp.DecToBit(string(a.GetString()));
+				temp.Bintohex(m_CurentString);
+				m_Line2.SetWindowText(m_CurentString.c_str());
+			}
+		}	
 	}
 	else if (m_InputType == 2)
 	{
@@ -789,8 +904,15 @@ void CMainForm::OnPushButtonInputHex()
 		}
 		else
 		{
-			temp.Bintohex(bin);
-			m_Line2.SetWindowText(bin.c_str());
+			CString a;
+			m_Line2.GetWindowText(a);
+			if (a.GetLength())
+			{
+				m_CurentString = string(a.GetString());
+				temp.BinToDec(string(a.GetString()));
+				temp.Bintohex(m_CurentString);
+				m_Line2.SetWindowText(m_CurentString.c_str());
+			}
 		}
 	}
 
@@ -1048,12 +1170,26 @@ void CMainForm::OnPushButtonNot()
 	else if (m_InputType == 2) m_Curent.BinToDec(m_CurentString);
 	else m_Curent.Bintohex(m_CurentString);
 
+	QInt temp = ~m_Curent;
 	m_Curent = ~m_Curent;
+	
+	
 
-	if (m_InputType == 1) m_Curent.SetData(m_CurentString);
-	else if (m_InputType == 2) m_Curent.BinToDec(m_CurentString);
+	if (m_InputType == 1)  m_Curent.ToDec(m_CurentString);
+	else if (m_InputType == 2) m_Curent.DecToBit(m_CurentString);
 	else m_Curent.Bintohex(m_CurentString);
+
 	m_Line2.SetWindowText(m_CurentString.c_str());
+
+	string bit;
+	temp.ToDec(bit);
+	m_DecLine.SetWindowText(("DEC: " + bit).c_str());
+	temp.DecToBit(bit);
+	string t = bit;
+	if (t.size() > 75) t.insert(75, "\n");
+	m_BinaryLine.SetWindowText(("BIN: " + t).c_str());
+	temp.Bintohex(bit);
+	m_HexLine.SetWindowText(("HEX: " + bit).c_str());
 }
 
 void CMainForm::OnPushButtonAnd()
@@ -1133,15 +1269,24 @@ void CMainForm::OnPushButtonInputDec()
 	{
 		if (m_CurentString.size() > 0)
 		{
+#if defined(_DEBUG)
+			MessageBox(_T(m_CurentString.c_str()));
+#endif
 			temp.BinToDec(m_CurentString);
 			temp.ToDec(m_CurentString);
 			m_Line2.SetWindowText(m_CurentString.c_str());
 		}
 		else
 		{
-			temp = m_Sum;
-			temp.ToDec(bin);
-			m_Line2.SetWindowText(bin.c_str());
+			CString a;
+			m_Line2.GetWindowText(a);
+			if (a.GetLength())
+			{
+				m_CurentString = string(a.GetString());
+				temp.BinToDec(string(a.GetString()));
+				temp.ToDec(m_CurentString);
+				m_Line2.SetWindowText(m_CurentString.c_str());
+			}
 		}
 	}
 	else if (m_InputType == 3)
@@ -1154,8 +1299,15 @@ void CMainForm::OnPushButtonInputDec()
 		}
 		else
 		{
-			temp.ToDec(bin);
-			m_Line2.SetWindowText(bin.c_str());
+			CString a;
+			m_Line2.GetWindowText(a);
+			if (a.GetLength())
+			{
+				m_CurentString = string(a.GetString());
+				temp.BinToDec(string(a.GetString()));
+				temp.ToDec(m_CurentString);
+				m_Line2.SetWindowText(m_CurentString.c_str());
+			}
 		}
 	}
 

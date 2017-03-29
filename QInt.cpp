@@ -333,6 +333,7 @@ QInt QInt::operator~()
 		int index = i % 32;
 		bool bit = GetBit(Data[id], index);
 		if (!bit) result.Data[id] = OnBit(result.Data[id], index);
+		else result.Data[id] = OffBit(result.Data[id], index);
 	}
 	return result;
 }
@@ -484,9 +485,9 @@ QInt operator*(const QInt& a, const QInt& b)
 // a/b
 QInt operator/(const QInt& a, const QInt& b)
 {
-	QInt Q ;
-	QInt M ;
-
+	QInt Q;
+	QInt M;
+	bool  sign = 0;
 	if (GetBit(a.Data[0], 31) && GetBit(b.Data[0], 31))
 	{
 		QInt negative_a;
@@ -498,8 +499,19 @@ QInt operator/(const QInt& a, const QInt& b)
 	}
 	else if (GetBit(a.Data[0], 31) && !GetBit(b.Data[0], 31))
 	{
-		Q = b;
-		M = a;
+		QInt negative_a;
+		QInt negative_b;
+		TimSoBu2((int*)a.Data, negative_a.Data);
+		TimSoBu2((int*)b.Data, negative_b.Data);
+		Q = negative_a;
+		M = negative_b;
+		sign = 1;
+	}
+	else if (!GetBit(a.Data[0], 31) && GetBit(b.Data[0], 31))
+	{
+		Q = a;
+		M = b;
+		sign = 1;
 	}
 	else
 	{
@@ -534,7 +546,7 @@ QInt operator/(const QInt& a, const QInt& b)
 		A.SHL(1);
 		if (lastbit) A.Data[3] = OnBit(A.Data[3], 0);
 		else A.Data[3] = OffBit(A.Data[3], 0);
-		
+
 		if (GetBit(M.Data[0], 31))	A = A + M;
 		else A = A - M;
 
@@ -548,6 +560,7 @@ QInt operator/(const QInt& a, const QInt& b)
 		else Q.Data[3] = OnBit(Q.Data[3], 0);
 	}
 
+	if (sign) TimSoBu2((int*)Q.Data, Q.Data);
 	return Q;
 
 }
