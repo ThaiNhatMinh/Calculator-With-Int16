@@ -64,7 +64,7 @@ CMainForm::CMainForm() :m_iXPos(400), m_iYPos(200), m_iWidth(800),m_iHeight(360)
 
 	m_ClearAll.Create(_T("C"), WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON, CRect(m_iWidth - w - 20-10, m_iHeight / 2, m_iWidth - w - 20 + w, m_iHeight / 2 + h), this, ID);
 	ID++;
-	m_ClearBack.Create(_T("<"), WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON, CRect(m_iWidth - w -20-10, m_iHeight / 2  + h, m_iWidth - w - 20 + w, m_iHeight / 2 + h*2), this, ID);
+	m_ClearBack.Create(_T(">"), WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON, CRect(m_iWidth - w -20-10, m_iHeight / 2  + h, m_iWidth - w - 20 + w, m_iHeight / 2 + h*2), this, ID);
 	ID++;
 	
 	char o[5][2] = { "+","-","*","/" };
@@ -475,13 +475,16 @@ void CMainForm::OnPushButtonClearAll()
 
 void CMainForm::OnPushButtonClearBack()
 {
-	if (m_CurentString.size() <= 0) return;
+	if (m_CurentString.size() == 0) return;
+	//MessageBox(_T(m_CurentString.c_str()));
 
-	m_CurentString.pop_back();
+	if(m_CurentString.length()==1) m_CurentString.erase();
+	else m_CurentString.pop_back();
 	m_Line2.SetWindowText(m_CurentString.c_str());
 
 	string bin;
-	m_Curent.SetData(m_CurentString);
+	if ((m_CurentString.size() == 0))m_Curent.SetData("0");
+	else m_Curent.SetData(m_CurentString);
 	m_Curent.DecToBit(bin);
 	string t = bin;
 	if (t.size() > 75) t.insert(75, "\n");
