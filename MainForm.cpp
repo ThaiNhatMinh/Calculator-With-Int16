@@ -398,7 +398,9 @@ void CMainForm::OnPushButtonClearAll()
 
 void CMainForm::OnPushButtonClearBack()
 {
-	if(m_CurentString.size()>0)m_CurentString.pop_back();
+	if (m_CurentString.size() <= 0) return;
+
+	m_CurentString.pop_back();
 	m_Line2.SetWindowText(m_CurentString.c_str());
 
 	string bin;
